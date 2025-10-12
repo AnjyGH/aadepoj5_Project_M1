@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HTML Basics</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="topic1.html">HTML Basics</a>
+    <a href="topic2.html">CSS Basics</a>
+    <a href="concepts.html">Key Concepts</a>
+    <a href="references.html">References</a>
+    <a href="about.html">About</a>
+  </nav>
+
+  <main class="container">
+    <header>
+      <h1>HTML Basics</h1>
+      <p>HTML uses simple tags to mark up content.</p>
+    </header>
+
+    <section>
+      <h2>Common Elements</h2>
+      <ul>
+        <li><code>&lt;h1&gt;</code> for a main heading</li>
+        <li><code>&lt;p&gt;</code> for a paragraph</li>
+        <li><code>&lt;ul&gt;</code> with <code>&lt;li&gt;</code> for a list</li>
+        <li><code>&lt;img&gt;</code> for images with <code>alt</code> text</li>
+        <li><code>&lt;a&gt;</code> for links</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Sample Image</h2>
+      <p>Images should have alt text that describes them.</p>
+      <img src="https://via.placeholder.com/640x360" alt="Placeholder image example" />
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Class project for IT 3203. Course site:
+      <a href="https://ksuweb.github.io/IT3203/" target="_blank" rel="noopener">https://ksuweb.github.io/IT3203/</a>
+    </p>
+  </footer>
+</body>
+</html>
