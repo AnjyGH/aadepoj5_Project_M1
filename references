@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>References</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="topic1.html">HTML Basics</a>
+    <a href="topic2.html">CSS Basics</a>
+    <a href="concepts.html">Key Concepts</a>
+    <a href="references.html">References</a>
+    <a href="about.html">About</a>
+  </nav>
+
+  <main class="container">
+    <header>
+      <h1>References</h1>
+      <p>Helpful links for learning.</p>
+    </header>
+
+    <ul>
+      <li><a href="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics" target="_blank" rel="noopener">MDN HTML basics</a></li>
+      <li><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/First_steps/What_is_CSS" target="_blank" rel="noopener">MDN What is CSS</a></li>
+      <li><a href="https://web.dev/learn/css/flexbox" target="_blank" rel="noopener">Flexbox guide</a></li>
+      <li><a href="https://validator.w3.org/" target="_blank" rel="noopener">HTML validator</a></li>
+    </ul>
+  </main>
+
+  <footer class="site-footer">
+    <p>Class project for IT 3203. Course site:
+      <a href="https://ksuweb.github.io/IT3203/" target="_blank" rel="noopener">https://ksuweb.github.io/IT3203/</a>
+    </p>
+  </footer>
+</body>
+</html>
