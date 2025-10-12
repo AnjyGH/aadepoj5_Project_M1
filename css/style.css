@@ -1,0 +1,72 @@
+/* Basic shared styles for all pages */
+* { box-sizing: border-box; }
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  color: #222;
+  background: #fafafa;
+  line-height: 1.6;
+}
+
+/* Layout wrapper */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1rem;
+  background: #fff;
+}
+
+/* Simple Flexbox menu on every page */
+.site-nav {
+  display: flex;           /* Flexbox for a row layout */
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+}
+
+.site-nav a {
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+}
+
+.site-nav a:hover {
+  background: #f0f0f0;     /* Hover effect */
+}
+
+h1, h2, h3 { line-height: 1.25; }
+
+p, li { margin-bottom: 0.5rem; }
+
+/* Images scale to fit */
+img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+/* Simple table style */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+th { background: #f7f7f7; }
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid #eee;
+  padding: 1rem;
+  font-size: 0.9rem;
+  background: #fff;
+}
