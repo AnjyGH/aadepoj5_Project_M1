@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiz</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* small quiz-only styles */
+    .quiz-card { background:#fff; padding:1rem; border:1px solid #eee; border-radius:8px; }
+    .q { margin:1rem 0; }
+    .q h3 { margin:0 0 .5rem 0; }
+    fieldset { border:1px solid #ddd; padding:.75rem 1rem; border-radius:8px; }
+    legend { padding:0 .4rem; }
+    .muted { color:#666; font-size:.9rem; }
+    .btnrow { display:flex; gap:.5rem; margin-top:1rem; }
+    .result-box { margin-top:1rem; padding:1rem; border-radius:8px; border:1px solid #eee; }
+    .correct { color:#0a7c2f; font-weight:600; }
+    .incorrect { color:#c0392b; font-weight:600; }
+    .pass { background:#e9f9ee; }
+    .fail { background:#fdecea; }
+    .answer { font-size:.95rem; opacity:.9; }
+  </style>
+</head>
+<body>
+    <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="topic1.html">HTML Basics</a>
+    <a href="topic2.html">CSS Basics</a>
+    <a href="concepts.html">Key Concepts</a>
+    <a href="references.html">References</a>
+    <a href="about.html">About</a>
+    <a href="quiz.html">Quiz</a>
+  </nav>
+
+  <main class="container">
+    <header>
+      <h1>Self-Assessment Quiz</h1>
+      <p class="muted">Passing is 70 percent. Feedback shows on this page.</p>
+    </header>
+
+    <form id="quizForm" class="quiz-card">
+      <!-- Q1: single-answer radio -->
+      <div class="q">
+        <h3>1) Which of the following correctly declares a constant variable <code>PI</code> with the value 3.14 in JavaScript?</h3>
+        <fieldset>
+          <legend>Choose one</legend>
+          <label><input type="radio" name="q1" value="A"> A. <code>var PI = 3.14;</code></label><br>
+          <label><input type="radio" name="q1" value="B"> B. <code>let PI = 3.14;</code></label><br>
+          <label><input type="radio" name="q1" value="C"> C. <code>const PI = 3.14;</code></label><br>
+          <label><input type="radio" name="q1" value="D"> D. <code>PI = 3.14;</code></label>
+        </fieldset>
+      </div>
+
+      <!-- Q2: single-answer radio -->
+      <div class="q">
+        <h3>2) Which tag is used to create an ordered list?</h3>
+        <fieldset>
+          <legend>Choose one</legend>
+          <label><input type="radio" name="q2" value="ul"> a. <code>&lt;ul&gt;</code></label><br>
+          <label><input type="radio" name="q2" value="ol"> b. <code>&lt;ol&gt;</code></label><br>
+          <label><input type="radio" name="q2" value="li"> c. <code>&lt;li&gt;</code></label>
+        </fieldset>
+      </div>
+
+      <!-- Q3: single-answer radio -->
+      <div class="q">
+        <h3>3) What exactly does “Execution Context” mean in JavaScript?</h3>
+        <fieldset>
+          <legend>Choose one</legend>
+          <label><input type="radio" name="q3" value="A"> A. Code block for function declarations</label><br>
+          <label><input type="radio" name="q3" value="B"> B. Environment for executing JavaScript code</label><br>
+          <label><input type="radio" name="q3" value="C"> C. Global object in the browser</label><br>
+          <label><input type="radio" name="q3" value="D"> D. Special runtime variable</label>
+        </fieldset>
+      </div>
+
+      <!-- Q4: short text input -->
+      <div class="q">
+        <h3>4) ______ is a HTML tag used to define a paragraph.</h3>
+        <label for="q4" class="muted">Type the exact tag name with angle brackets</label><br>
+        <input type="text" id="q4" name="q4" placeholder="e.g. &lt;p&gt;">
+      </div>
+
+      <!-- Q5: multi-select checkboxes -->
+      <div class="q">
+        <h3>5) Which of the following tags are block-level elements by default? <span class="muted">(Select two.)</span></h3>
+        <fieldset>
+          <legend>Select all that apply</legend>
+          <label><input type="checkbox" name="q5" value="span"> A) <code>&lt;span&gt;</code></label><br>
+          <label><input type="checkbox" name="q5" value="div"> B) <code>&lt;div&gt;</code></label><br>
+          <label><input type="checkbox" name="q5" value="img"> C) <code>&lt;img&gt;</code></label><br>
+          <label><input type="checkbox" name="q5" value="p"> D) <code>&lt;p&gt;</code></label>
+        </fieldset>
+      </div>
+
+      <div class="btnrow">
+        <button type="submit">Submit</button>
+        <button type="button" id="resetBtn">Reset</button>
+      </div>
+    </form>
+
+    <section id="results" class="result-box" hidden></section>
+
+    <footer class="site-footer">
+      <p>Class project for IT 3203. Course site:
+        <a href="https://ksuweb.github.io/IT3203/" target="_blank" rel="noopener">https://ksuweb.github.io/IT3203/</a>
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    // Answer key for the Quizzes
+    const KEY = {
+      q1: "C",              // const PI = 3.14;
+      q2: "ol",             // <ol>
+      q3: "B",              // environment for executing JS code
+      q4: "<p>",            // paragraph tag
+      q5: ["div","p"]       // block-level elements
+    };
+
+    function normalize(s){ return String(s || "").trim().toLowerCase(); }
+
+    function gradeQuiz(e){
+      e.preventDefault();
+      let score = 0, total = 5;
+      const feedback = [];
+
+      // Q1
+      const q1 = document.querySelector('input[name="q1"]:checked');
+      const a1 = q1 ? q1.value : "";
+      const ok1 = a1 === KEY.q1;
+      if(ok1) score++;
+      feedback.push({q:"1) Constant PI", ok:ok1, your:a1||"(no choice)", ans:"C"});
+
+      // Q2
+      const q2 = document.querySelector('input[name="q2"]:checked');
+      const a2 = q2 ? q2.value : "";
+      const ok2 = a2 === KEY.q2;
+      if(ok2) score++;
+      feedback.push({q:"2) Ordered list tag", ok:ok2, your:a2||"(no choice)", ans:"<ol>"});
+
+      // Q3
+      const q3 = document.querySelector('input[name="q3"]:checked');
+      const a3 = q3 ? q3.value : "";
+      const ok3 = a3 === KEY.q3;
+      if(ok3) score++;
+      feedback.push({q:"3) Execution Context", ok:ok3, your:a3||"(no choice)", ans:"Environment for executing JS code"});
+
+      // Q4
+      const a4 = document.getElementById("q4").value;
+      const ok4 = normalize(a4) === normalize(KEY.q4);
+      if(ok4) score++;
+      feedback.push({q:"4) Paragraph tag", ok:ok4, your:a4||"(blank)", ans:KEY.q4});
+
+      // Q5
+      const picks = Array.from(document.querySelectorAll('input[name="q5"]:checked')).map(x=>x.value);
+      const setA = new Set(picks);
+      const setK = new Set(KEY.q5);
+      const allRight = KEY.q5.every(v=>setA.has(v));
+      const noneWrong = picks.every(v=>setK.has(v));
+      const ok5 = allRight && noneWrong;
+      if(ok5) score++;
+      feedback.push({q:"5) Block-level tags", ok:ok5, your:picks.join(", ")||"(no choice)", ans:KEY.q5.join(", ")});
+
+      // Results box
+      const percent = Math.round(score/total*100);
+      const pass = percent >= 70;
+      const box = document.getElementById("results");
+      box.hidden = false;
+      box.className = "result-box " + (pass ? "pass" : "fail");
+
+      let html = `<h2>Result: ${pass ? "Pass" : "Fail"}</h2>
+                  <p>Score: <strong>${score}/${total}</strong> (${percent}%)</p>
+                  <ul>`;
+      feedback.forEach(f=>{
+        html += `<li>
+          <div>${f.q}</div>
+          <div class="${f.ok ? "correct":"incorrect"}">${f.ok ? "Correct" : "Incorrect"}</div>
+          <div class="answer">Your answer: ${f.your}</div>
+          <div class="answer">Correct answer: ${f.ans}</div>
+        </li>`;
+      });
+      html += "</ul>";
+      box.innerHTML = html;
+      box.scrollIntoView({behavior:"smooth"});
+    }
+
+    function resetQuiz(){
+      document.getElementById("quizForm").reset();
+      const box = document.getElementById("results");
+      box.hidden = true;
+      box.innerHTML = "";
+      box.className = "result-box";
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    document.getElementById("quizForm").addEventListener("submit", gradeQuiz);
+    document.getElementById("resetBtn").addEventListener("click", resetQuiz);
+  </script>
+</body>
+</html>
